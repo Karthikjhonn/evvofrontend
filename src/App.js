@@ -1,8 +1,14 @@
 import logo from "./logo.svg";
 import "./App.css";
 
+import MainRouter from "./router/MainRouter";
+import { AuthProvider } from "./context/AuthContext";
+
 function App() {
-  return <div className="App">Hello World! </div>;
-}
+  return (
+    <AuthProvider>
+      <MainRouter />
+    </AuthProvider>
+  );
 
 export default App;
