@@ -7,6 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import NotFound from "../pages/notfound/NotFound";
 import { Toaster } from "react-hot-toast";
 import SignUp from "../pages/Auth/SignUp";
+import Notification from "../pages/notification/Notification";
 
 function MainRouter() {
   return (
@@ -34,6 +35,15 @@ function MainRouter() {
           element={
             <PrivateRoute>
               <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path="/notification"
+          element={
+            <PrivateRoute>
+              <Notification />
             </PrivateRoute>
           }
         />

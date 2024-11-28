@@ -6,7 +6,14 @@ export const POST = (url, data) => {
   return axios.post(`${base_URL}${url}`, data, {
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
+    },
+  });
+};
+export const DELETE = (url, data) => {
+  return axios.delete(`${base_URL}${url}`, {
+    data: data,
+    headers: {
+      "Content-Type": "application/json",
     },
   });
 };
@@ -14,7 +21,7 @@ export const GET = (url) => {
   return axios.get(`${base_URL}${url}`, {
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
+
       Authorization: `Bearer ${token}`,
     },
   });
