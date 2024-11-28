@@ -7,7 +7,10 @@ import { HiMiniInformationCircle } from "react-icons/hi2";
 import { HiMiniTag } from "react-icons/hi2";
 import { TbLogout2 } from "react-icons/tb";
 import { useAuth } from "../context/AuthContext";
+import { useLocation, useNavigate } from "react-router-dom";
 function SideNavigation() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const { logout } = useAuth();
   return (
     <div className="w-   bg-gray-100/75 text-black">
@@ -16,11 +19,27 @@ function SideNavigation() {
           Evvo
         </h2>
         <ul className="space-y-2">
-          <li className="px-5 py-2 min-h-11 capitalize hover:bg-gray-200 cursor-pointer">
-            <HiHome className="text-2xl mx-auto" />
+          <li
+            className="px-5 py-2 min-h-11 capitalize hover:bg-gray-200 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            <HiHome
+              className={`text-2xl  mx-auto ${
+                location.pathname == "/" ? "text-black" : "text-gray-400"
+              }`}
+            />
           </li>
-          <li className="px-5 py-2 min-h-11 capitalize hover:bg-gray-200 cursor-pointer">
-            <HiMegaphone className="text-2xl text-gray-400 mx-auto" />
+          <li
+            className="px-5 py-2 min-h-11 capitalize hover:bg-gray-200 cursor-pointer"
+            onClick={() => navigate("/notification")}
+          >
+            <HiMegaphone
+              className={`text-2xl  mx-auto ${
+                location.pathname == "/notification"
+                  ? "text-black"
+                  : "text-gray-400"
+              }`}
+            />
           </li>
           <li className="px-5 py-2 min-h-11 capitalize hover:bg-gray-200 cursor-pointer">
             <HiEnvelope className="text-2xl text-gray-400 mx-auto" />
