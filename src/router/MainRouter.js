@@ -11,7 +11,7 @@ import Notification from "../pages/notification/Notification";
 
 function MainRouter() {
   return (
-    <BrowserRouter>
+    <>
       <Routes>
         <Route
           path="/login"
@@ -50,7 +50,7 @@ function MainRouter() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
-    </BrowserRouter>
+    </>
   );
 }
 

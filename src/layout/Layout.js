@@ -5,7 +5,7 @@ function Layout({ children }) {
   return (
     <div className="flex min-h-dvh">
       <SideNavigation />
-      <main className="p-6 w-full container mx-auto">{children}</main>
+      <main className="pt-14 p-6 w-full container mx-auto lg:pt-6">{children}</main>
     </div>
   );
 }

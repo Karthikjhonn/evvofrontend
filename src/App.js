@@ -1,14 +1,18 @@
-import logo from "./logo.svg";
-import "./App.css";
-
 import MainRouter from "./router/MainRouter";
 import { AuthProvider } from "./context/AuthContext";
+import { BrowserRouter } from "react-router-dom";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
   return (
-    <AuthProvider>
-      <MainRouter />
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <MainRouter />
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 export default App;

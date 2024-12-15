@@ -7,6 +7,7 @@ export const POST = (url, data) => {
     headers: {
       "Content-Type": "application/json",
     },
+    withCredentials: true,
   });
 };
 export const DELETE = (url, data) => {
@@ -15,6 +16,7 @@ export const DELETE = (url, data) => {
     headers: {
       "Content-Type": "application/json",
     },
+    withCredentials: true,
   });
 };
 export const GET = (url) => {
@@ -24,5 +26,6 @@ export const GET = (url) => {
 
       Authorization: `Bearer ${token}`,
     },
+    withCredentials: true,
   });
 };

@@ -6,8 +6,8 @@ export const LoginAuth = (payload) => {
 export const CreateUser = (payload) => {
   return POST(`/api/v1/user/sign-up`, payload);
 };
-export const getUser = (payload) => {
-  return GET(`/api/v1/user/getUser/${payload}`);
+export const getUser = () => {
+  return GET(`/api/v1/user/getUser`);
 };
 export const leaveRequest = (payload) => {
   return POST(`/api/v1/leaveRequest`, payload);
