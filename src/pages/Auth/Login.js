@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import FormError from "../../components/error/FormError";
 import { useFormik } from "formik";
 import { loginValidation } from "../../constants/validation/Validation";
-import { LoginAuth } from "../../Api/ApiIndex";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
 import Button from "../../components/button/Button";
 import { useAuth } from "../../context/AuthContext";
+
 function Login() {
-  const { setIsAuth } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const { logIn, loading } = useAuth();
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -25,32 +23,11 @@ function Login() {
         email: values.email,
         password: values.password,
       };
-      getAuth(payload);
+      logIn(payload);
     },
   });
 
-  const getAuth = async (payload) => {
-    try {
-      setLoading(true);
-      const res = await LoginAuth(payload);
-      if (res.status == 200) {
-        console.log(res?.data?.token);
-        localStorage.setItem("token", res?.data?.token);
-        localStorage.setItem("userId", res?.data?.user?.id);
-        setIsAuth(true);
-        console.log(res?.data?.message);
-        toast.success(res?.data?.message || "Welcome Back!");
-        setLoading(false);
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error?.response?.data?.message || "Some thing went wrong!");
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
+
   return (
     <div className="flex justify-center items-center h-dvh bg-container dark">
       <form className="w-full max-w-md" onSubmit={formik.handleSubmit}>
@@ -123,7 +100,11 @@ function Login() {
                 />
               </div>
 
-              <Button type="submit" name={loading ? <Loader /> : "Login"} disable={loading} />
+              <Button
+                type="submit"
+                name={loading ? <Loader /> : "Login"}
+                disable={loading}
+              />
               <p className="my-2 text-black text-center text-xs cursor-default">
                 Don't have an account?{" "}
                 <span

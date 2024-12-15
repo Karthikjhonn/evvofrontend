@@ -3,10 +3,9 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function PublicRoute({ children }) {
-  const {isAuth}=useAuth()
-  console.log(isAuth);
-  
-  // const isAuth = localStorage.getItem("token");
+  const { isJwtTokenValid } = useAuth();
+  const isAuth = isJwtTokenValid();
+  // console.log("public", isAuth);
   return isAuth ? <Navigate to="/" /> : children;
 }
 

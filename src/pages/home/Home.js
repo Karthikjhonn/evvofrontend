@@ -6,30 +6,23 @@ import HomeTabs from "../../components/tabs/HomeTabs";
 import LeaveChart from "../../components/charts/LeaveChart";
 import BasicTable from "../../components/table/Table";
 import Button from "../../components/button/Button";
-import Modal from "react-modal";
 import LeaveRequestForm from "../../components/form/LeaveRequestForm";
 import MyModal from "../../components/dialogmodal/MyModal";
-import { getUser, LoginAuth } from "../../Api/ApiIndex";
+import { getUser } from "../../Api/ApiIndex";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
 import Loader from "../../components/loader/Loader";
-const leaveData = {
-  sickLeave: 5,
-  earnedLeave: 10,
-  casualLeave: 7,
-};
-
 function Home() {
   const { user, setUser } = useAuth();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
-  const getUserDetails = async (payload) => {
+  const getUserDetails = async () => {
     try {
-      const res = await getUser(payload);
+      const res = await getUser();
       if (res.status == 200) {
-        console.log(res?.data?.data);
+        // console.log(res?.data?.data);
         setUser(res?.data?.data);
         setLoading(false);
       }
@@ -37,17 +30,21 @@ function Home() {
       console.log(error);
       toast.error(error?.response?.data?.message || "Some thing went wrong!");
       setLoading(true);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    getUserDetails(localStorage.getItem("userId"));
+    getUserDetails();
   }, [modalIsOpen]);
   if (loading) {
     return (
-      <div className="flex justify-center items-center w-full h-dvh">
-        <Loader />
-      </div>
+      <Layout>
+        <div className="flex justify-center items-center w-full h-dvh">
+          <Loader />
+        </div>
+      </Layout>
     );
   }
   return (

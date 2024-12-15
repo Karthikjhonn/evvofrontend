@@ -8,10 +8,11 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
 import Button from "../../components/button/Button";
 import { useAuth } from "../../context/AuthContext";
+import Cookies from "js-cookie";
 function SignUp() {
-  const { setIsAuth } = useAuth();
+  const { signIn, loading } = useAuth();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -27,32 +28,10 @@ function SignUp() {
         password: values.password,
       };
       //   console.log(payload);
-      toCreateUser(payload);
+      signIn(payload);
     },
   });
 
-  const toCreateUser = async (payload) => {
-    try {
-      setLoading(true);
-      const res = await CreateUser(payload);
-      if (res.status == 200) {
-        console.log(res?.data?.token);
-        localStorage.setItem("token", res?.data?.token);
-        localStorage.setItem("userId", res?.data?.userLeaveBalance?.userId);
-        console.log(res?.data?.message);
-        setIsAuth(true);
-        toast.success(res?.data?.message || "Welcome Back!");
-        setLoading(false);
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-      toast.error(error?.response?.data?.message || "Some thing went wrong!");
-    } finally {
-      setLoading(false);
-    }
-  };
   return (
     <div className="flex justify-center items-center h-dvh bg-container dark">
       <form className="w-full max-w-md" onSubmit={formik.handleSubmit}>
@@ -118,7 +97,11 @@ function SignUp() {
                   error={formik.touched.password && formik.errors.password}
                 />
               </div>
-              <Button type="submit" name={loading ? <Loader /> : "Sign Up"} disable={loading} />
+              <Button
+                type="submit"
+                name={loading ? <Loader /> : "Sign Up"}
+                disable={loading}
+              />
               <p className="my-2 text-black/75 text-center text-xs cursor-default">
                 Have an account already?{" "}
                 <span
