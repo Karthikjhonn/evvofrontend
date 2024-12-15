@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
       if (res.status == 200) {
         console.log(res?.data?.token);
         Cookies.set("token", res?.data?.token, { path: "/" });
-        Cookies.set("userId", res?.data?.user?.id, { path: "/" });
+        // Cookies.set("userId", res?.data?.user?.id, { path: "/" });
         console.log(res?.data?.message);
         toast.success(res?.data?.message || "Welcome Back!");
         navigate("/");
