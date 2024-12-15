@@ -11,7 +11,7 @@ const isJwtTokenValid = () => {
   const token = Cookies.get("token");
   if (!token || token == "" || token == null || token == undefined) {
     console.log("No token found");
-    return false
+    return false;
   }
   try {
     const decoded = jwtDecode(token);
@@ -37,8 +37,11 @@ export const AuthProvider = ({ children }) => {
       const res = await LoginAuth(payload);
       if (res.status == 200) {
         console.log(res?.data?.token);
-        Cookies.set("token", res?.data?.token, { path: "/" });
-        // Cookies.set("userId", res?.data?.user?.id, { path: "/" });
+        Cookies.set("token", res?.data?.token, {
+          path: "/",
+          secure: true,
+          sameSite: "None",
+        });
         console.log(res?.data?.message);
         toast.success(res?.data?.message || "Welcome Back!");
         navigate("/");
@@ -62,10 +65,12 @@ export const AuthProvider = ({ children }) => {
       const res = await CreateUser(payload);
       if (res.status == 200) {
         console.log(res?.data?.token);
-        Cookies.set("token", res?.data?.token, { path: "/" });
-        Cookies.set("userId", res?.data?.userLeaveBalance?.userId, {
+        Cookies.set("token", res?.data?.token, {
           path: "/",
+          secure: true,
+          sameSite: "None",
         });
+
         console.log(res?.data?.message);
         toast.success(res?.data?.message || "Welcome Back!");
         navigate("/");
