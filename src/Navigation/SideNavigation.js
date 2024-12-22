@@ -19,7 +19,7 @@ function SideNavigation() {
   };
   return (
     <div
-      className={`bg-gray-100 absolute top-0 z-30  transition-all ease-in-out lg:bg-gray-100/75 lg:static  text-black ${
+      className={`bg-gray-100 fixed top-0 z-30  transition-all ease-in-out lg:bg-gray-100/75 lg:sticky  h-screen  text-black ${
         navBar ? "left-0" : "-left-24"
       }`}
     >
@@ -33,7 +33,7 @@ function SideNavigation() {
           }`}
         />
       </button>
-      <div className="flex flex-col min-h-screen sticky top-0">
+      <div className="flex flex-col h-full">
         <h2 className="font-bold text-accent-500 text-2xl my-3 px-5 mb-6">
           Evvo
         </h2>
