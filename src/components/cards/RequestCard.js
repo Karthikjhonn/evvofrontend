@@ -4,11 +4,6 @@ import { deleteLeaveRequest } from "../../Api/ApiIndex";
 import toast from "react-hot-toast";
 import Loader from "../loader/Loader";
 
-const test = {
-  userId: "6745edbb632998841574c86b",
-  requestId: "6748338f27b4ad0ae120b4f6",
-};
-
 function RequestCard({ data, reload }) {
   const [loading, setLoading] = useState(false);
   const toDeleteRequest = async (payload) => {
@@ -19,12 +14,11 @@ function RequestCard({ data, reload }) {
       if (res.status == 200) {
         console.log(res?.data?.data);
         toast.success("Request deleted successfully");
-        setLoading(false);
+        reload();
       }
     } catch (error) {
       console.log(error);
       toast.error(error?.response?.data?.message || "Some thing went wrong!");
-      setLoading(true);
     } finally {
       setLoading(false);
     }
@@ -40,7 +34,7 @@ function RequestCard({ data, reload }) {
             <p className="text-xs font-normal text-black/50">
               Applied on:{" "}
               <span className="ms-1">
-                {moment(data?.requestDate).format("DD/mm/yyyy")}
+                {moment(data?.requestDate).format("DD/MM/YYYY")}
               </span>
             </p>
           </div>
@@ -55,7 +49,8 @@ function RequestCard({ data, reload }) {
           {data?.comments}
         </p>
         <p className="text-xs mt-1 capitalize font-medium">
-          from: 18/11/2024 to: 20/11/2024
+          <span className="me-1.5">From: {moment(data?.startDate).format("DD/MM/YYYY")}</span>{" "}
+          <span>To: {moment(data?.endDate).format("DD/MM/YYYY")}</span>
         </p>
         <div className="flex items-center flex-wrap gap-x-4 mt-5 ">
           <button

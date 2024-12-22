@@ -21,6 +21,8 @@ function MyModal({ modalIsOpen, closeModal, children }) {
           flexDirection: "column",
           alignItems: "center",
           overflowY: "auto",
+          margin: 16,
+          overscrollBehavior: "contain",
         },
         overlay: {
           backgroundColor: "rgba(0, 0, 0, 0.5)",
