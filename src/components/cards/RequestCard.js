@@ -7,12 +7,12 @@ import Loader from "../loader/Loader";
 function RequestCard({ data, reload }) {
   const [loading, setLoading] = useState(false);
   const toDeleteRequest = async (payload) => {
-    console.log(payload);
+    // console.log(payload);
     setLoading(true);
     try {
       const res = await deleteLeaveRequest(payload);
       if (res.status == 200) {
-        console.log(res?.data?.data);
+        // console.log(res?.data);
         toast.success("Request deleted successfully");
         reload();
       }
@@ -49,7 +49,9 @@ function RequestCard({ data, reload }) {
           {data?.comments}
         </p>
         <p className="text-xs mt-1 capitalize font-medium">
-          <span className="me-1.5">From: {moment(data?.startDate).format("DD/MM/YYYY")}</span>{" "}
+          <span className="me-1.5">
+            From: {moment(data?.startDate).format("DD/MM/YYYY")}
+          </span>{" "}
           <span>To: {moment(data?.endDate).format("DD/MM/YYYY")}</span>
         </p>
         <div className="flex items-center flex-wrap gap-x-4 mt-5 ">
@@ -71,7 +73,6 @@ function RequestCard({ data, reload }) {
                   userId: data?.userId,
                   requestId: data?._id,
                 });
-                reload();
               }}
             >
               {loading ? (
