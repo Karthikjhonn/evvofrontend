@@ -14,7 +14,6 @@ function MyModal({ modalIsOpen, closeModal, children }) {
           maxWidth: "480px",
           height: "80vh",
           maxHeight: "680px",
-          padding: "20px",
           borderRadius: "8px",
           backgroundColor: "#fff",
           display: "flex",

@@ -15,11 +15,11 @@ function Notification() {
   const reloaded = () => {
     setReload(!reload);
   };
-  const getUserDetails = async (payload) => {
+  const getUserDetails = async () => {
     try {
-      const res = await getUser(payload);
+      const res = await getUser();
       if (res.status == 200) {
-        console.log(res?.data?.data);
+        // console.log(res?.data?.data);
         setUser(res?.data?.data);
       }
     } catch (error) {
@@ -29,7 +29,7 @@ function Notification() {
   };
 
   useEffect(() => {
-    getUserDetails(localStorage.getItem("userId"));
+    getUserDetails();
   }, [reload]);
 
   return (
@@ -55,8 +55,8 @@ function Notification() {
               </p>
             </div>
           ) : (
-            user?.LeaveHistory.map((data) => (
-              <RequestCard data={data} reload={reloaded} />
+            user?.LeaveHistory?.map((data) => (
+              <RequestCard data={data} reload={reloaded} key={data?._id} />
             ))
           )}
           {/* <div className="bg-gray-200 h-56 rounded-2xl animate-pulse"></div> */}
