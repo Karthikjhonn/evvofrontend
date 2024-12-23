@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Layout from "../../layout/Layout";
 import { HiHome } from "react-icons/hi2";
 import { TbChevronRight } from "react-icons/tb";
@@ -18,22 +18,20 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
-  const getUserDetails = async () => {
+  const getUserDetails = useCallback(async () => {
     try {
       const res = await getUser();
-      if (res.status == 200) {
+      if (res.status === 200) {
         // console.log(res?.data?.data);
         setUser(res?.data?.data);
-        setLoading(false);
       }
     } catch (error) {
       console.log(error);
       toast.error(error?.response?.data?.message || "Some thing went wrong!");
-      setLoading(true);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getUserDetails();
@@ -56,7 +54,6 @@ function Home() {
           Home
         </button>
       </div>
-
       <main className="mt-6 py-2">
         <aside className="mb-10">
           <h1 className="text-lg lg:text-2xl font-medium mb-1">

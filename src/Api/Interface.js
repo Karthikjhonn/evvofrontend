@@ -1,7 +1,6 @@
 import axios from "axios";
-// const base_URL = "http://localhost:3300";
-const base_URL = "https://evvo-backend.onrender.com";
-const token = localStorage.getItem("token") || null;
+const base_URL = process.env.REACT_APP_API_URL
+// const token = localStorage.getItem("token") || null;
 export const POST = (url, data) => {
   return axios.post(`${base_URL}${url}`, data, {
     headers: {
