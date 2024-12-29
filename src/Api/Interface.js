@@ -1,5 +1,7 @@
 import axios from "axios";
 const base_URL = process.env.REACT_APP_API_URL
+console.log(process.env.NODE_ENV);
+
 // const token = localStorage.getItem("token") || null;
 export const POST = (url, data) => {
   return axios.post(`${base_URL}${url}`, data, {
