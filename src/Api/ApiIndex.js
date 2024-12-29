@@ -1,5 +1,9 @@
 import { DELETE, GET, POST } from "./Interface";
 
+
+export const startServer = ()=>{
+  return GET("/")
+}
 export const LoginAuth = (payload) => {
   return POST(`/api/v1/user/sign-in`, payload);
 };
