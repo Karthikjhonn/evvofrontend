@@ -57,7 +57,7 @@ function Home() {
       <main className="mt-6 py-2">
         <aside className="mb-10">
           <h1 className="text-lg lg:text-2xl font-medium mb-1">
-            Hello {user?.user?.name} 👋
+            Hello, {user?.user?.name} 👋
           </h1>
           <p className="text-sm font-normal text-black/50">
             Here’s an overview of your current leave balance

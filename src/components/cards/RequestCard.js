@@ -4,17 +4,37 @@ import { deleteLeaveRequest } from "../../Api/ApiIndex";
 import toast from "react-hot-toast";
 import Loader from "../loader/Loader";
 
+function isDateValid(startDate) {
+  if (!startDate) {
+    console.error("startDate is undefined or null.");
+    return false;
+  }
+  const inputDate = new Date(startDate);
+  if (isNaN(inputDate)) {
+    console.error("Invalid startDate format.");
+    return false;
+  }
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0);
+  return inputDate >= currentDate;
+}
+
 function RequestCard({ data, reload }) {
   const [loading, setLoading] = useState(false);
+  const [datePass, setDatePass] = useState(false);
   const toDeleteRequest = async (payload) => {
     // console.log(payload);
     setLoading(true);
     try {
-      const res = await deleteLeaveRequest(payload);
-      if (res.status == 200) {
-        // console.log(res?.data);
-        toast.success("Request deleted successfully");
-        reload();
+      if (isDateValid(data?.startDate)) {
+        const res = await deleteLeaveRequest(payload);
+        if (res.status == 200) {
+          // console.log(res?.data);
+          toast.success("Request deleted successfully");
+          reload();
+        }
+      } else {
+        setDatePass(true);
       }
     } catch (error) {
       console.log(error);
@@ -85,6 +105,11 @@ function RequestCard({ data, reload }) {
             </button>
           )}
         </div>
+        {datePass && (
+          <small className="text-red-500 mt-3 text-xs">
+           The request date has passed and cannot be deleted!
+          </small>
+        )}
       </div>
     </>
   );

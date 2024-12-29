@@ -10,14 +10,14 @@ import moment from "moment/moment";
 import { leaveRequest } from "../../Api/ApiIndex";
 import toast from "react-hot-toast";
 import Loader from "../loader/Loader";
-
+import { IoCloseCircleOutline } from "react-icons/io5";
 const options = [
   { value: "sickLeave", label: "Sick Leave" },
   { value: "earnedLeave", label: "Earned Leave" },
   { value: "casualLeave", label: "Casual Leave" },
 ];
 
-function LeaveRequestForm({closeModal}) {
+function LeaveRequestForm({ closeModal }) {
   const [loading, setLoading] = useState(false);
   const renderDayContents = (day, date) => {
     if (!date) return <span>{day}</span>;
@@ -54,7 +54,7 @@ function LeaveRequestForm({closeModal}) {
         console.log(res?.data?.message);
         toast.success(res?.data?.message || "Request sent successfully");
         setLoading(false);
-        closeModal()
+        closeModal();
       }
     } catch (error) {
       console.log(error);
@@ -68,7 +68,15 @@ function LeaveRequestForm({closeModal}) {
       className="w-full max-w-md p-6 bg-white shadow-sm rounded-lg mx-auto"
       onSubmit={formik.handleSubmit}
     >
-      <h2 className="text-xl font-bold mb-4">Leave Request</h2>
+      <div className="mb-4 flex justify-between items-center">
+        <h2 className="text-xl font-bold">Leave Request</h2>
+        <span
+          className="size-10 rounded-full flex justify-center items-center active:bg-gray-100 active:opacity-50"
+          onClick={closeModal}
+        >
+          <IoCloseCircleOutline className="text-2xl text-black/50" />
+        </span>
+      </div>
 
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -147,7 +155,11 @@ function LeaveRequestForm({closeModal}) {
         <FormError error={formik.touched.comments && formik.errors.comments} />
       </div>
 
-      <Button type="submit" name={loading?<Loader/>:"Submit Leave Request"} disable={loading} />
+      <Button
+        type="submit"
+        name={loading ? <Loader /> : "Submit Leave Request"}
+        disable={loading}
+      />
     </form>
   );
 }
