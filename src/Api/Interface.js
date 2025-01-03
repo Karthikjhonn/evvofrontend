@@ -1,8 +1,12 @@
 import axios from "axios";
+import Cookies from "js-cookie";
+
 const base_URL = process.env.REACT_APP_API_URL
 console.log(process.env.NODE_ENV);
 
-// const token = localStorage.getItem("token") || null;
+const token = Cookies.get("token") || null;
+axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+axios.defaults.withCredentials = true;
 export const POST = (url, data) => {
   return axios.post(`${base_URL}${url}`, data, {
     headers: {
