@@ -19,7 +19,7 @@ function SideNavigation() {
   };
   return (
     <div
-      className={`bg-gray-100 fixed top-0 z-30  transition-all ease-in-out lg:bg-gray-100/75 lg:sticky  h-screen  text-black ${
+      className={`bg-gray-100 fixed top-0 z-30  transition-all ease-in-out lg:bg-gray-100/75 lg:sticky  h-dvh min-h-screen  text-black ${
         navBar ? "left-0" : "-left-24"
       }`}
     >

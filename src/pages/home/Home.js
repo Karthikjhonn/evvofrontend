@@ -85,7 +85,7 @@ function Home() {
           {user?.leaveStatus && <LeaveChart data={user?.leaveStatus} />}
         </section>
         <section className="">
-          <div className="flex justify-between mb-4">
+          <div className="flex justify-between items-center mb-4">
             <h1 className="text-base font-medium ">My dashboard</h1>
             <div>
               <Button name="Apply Leave" onclick={openModal} disable={false} />
