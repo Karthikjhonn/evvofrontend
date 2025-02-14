@@ -15,7 +15,7 @@ function Login() {
     initialValues: {
       email: "",
       password: "",
-      confirmPassword: "",
+      // confirmPassword: "",
     },
     validationSchema: loginValidation,
     onSubmit: (values) => {
@@ -84,7 +84,7 @@ function Login() {
                 error={formik.errors.password && formik.touched.password}
               />
             </div>
-            <div>
+            {/* <div>
               <label className="block mb-2 text-sm font-medium text-black">
                 Confirm password
               </label>
@@ -104,7 +104,7 @@ function Login() {
                   formik.errors.confirmPassword
                 }
               />
-            </div>
+            </div> */}
 
             <Button
               type="submit"

@@ -4,13 +4,16 @@ export const signUpValidation = Yup.object({
   name: Yup.string().required("User name is required"),
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().min(3, "Too short").required("Required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password")], "Passwords must match")
+    .required("Confirm Password is required"),
 });
 export const loginValidation = Yup.object({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().min(3, "Too short").required("Required"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password")], "Passwords must match")
-    .required("Confirm Password is required"),
+  // confirmPassword: Yup.string()
+  //   .oneOf([Yup.ref("password")], "Passwords must match")
+  //   .required("Confirm Password is required"),
 });
 
 export const leaveRequestValidation = Yup.object({

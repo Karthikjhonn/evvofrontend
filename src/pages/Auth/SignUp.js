@@ -18,6 +18,7 @@ function SignUp() {
       name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
     validationSchema: signUpValidation,
     onSubmit: (values) => {
@@ -69,7 +70,6 @@ function SignUp() {
               />
               <FormError error={formik.touched.name && formik.errors.name} />
             </div>
-
             <div>
               <label className="block mb-2 text-sm font-medium text-black">
                 Email
@@ -101,6 +101,27 @@ function SignUp() {
               />
               <FormError
                 error={formik.touched.password && formik.errors.password}
+              />
+            </div>
+            <div>
+              <label className="block mb-2 text-sm font-medium text-black">
+                Confirm password
+              </label>
+              <input
+                className="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg block w-full p-2.5"
+                placeholder="••••••••"
+                id="confirmPassword"
+                type="password"
+                value={formik.values.confirmPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+
+              <FormError
+                error={
+                  formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword
+                }
               />
             </div>
             <Button
