@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import FormError from "../../components/error/FormError";
 import { useFormik } from "formik";
 import { loginValidation } from "../../constants/validation/Validation";
@@ -11,6 +11,7 @@ import minionImage from "../../asset/image/minion.png";
 function Login() {
   const { logIn, loading } = useAuth();
   const navigate = useNavigate();
+  const controllerRef = useRef(new AbortController());
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -24,10 +25,12 @@ function Login() {
         email: values.email,
         password: values.password,
       };
-      logIn(payload);
+      logIn(payload, controllerRef.current.signal);
     },
   });
-
+  useEffect(() => {
+    return () => controllerRef.current.abort();
+  }, []);
   return (
     <div className="h-dvh grid p-5 lg:grid-cols-2 xl:grid-cols-3">
       <div

@@ -56,7 +56,7 @@ function Home() {
       </div>
       <main className="mt-6 py-2">
         <aside className="mb-10">
-          <h1 className="text-lg lg:text-2xl font-medium mb-1">
+          <h1 className="text-lg lg:text-2xl font-medium mb-1 capitalize">
             Hello, {user?.user?.name} 👋
           </h1>
           <p className="text-sm font-normal text-black/50">

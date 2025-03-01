@@ -4,8 +4,8 @@ import { DELETE, GET, POST } from "./Interface";
 export const startServer = ()=>{
   return GET("/")
 }
-export const LoginAuth = (payload) => {
-  return POST(`/api/v1/user/sign-in`, payload);
+export const LoginAuth = (payload,signal) => {
+  return POST(`/api/v1/user/sign-in`, payload ,signal);
 };
 export const CreateUser = (payload) => {
   return POST(`/api/v1/user/sign-up`, payload);
