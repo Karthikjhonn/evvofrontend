@@ -10,8 +10,8 @@ const LeaveChart = ({ data }) => {
     datasets: [
       {
         data: [data.sickLeave, data.earnedLeave, data.casualLeave],
-        backgroundColor: ["#00b4d8", "#44797F", "#9e65f9"],
-        hoverBackgroundColor: ["#48cae4", "#3a6368", "#ca7df9"],
+        backgroundColor: ["#eaedf0", "#ced4da", "#181818"],
+        // hoverBackgroundColor: ["#48cae4", "#3a6368", "#ca7df9"],
       },
     ],
   };
@@ -27,8 +27,8 @@ const LeaveChart = ({ data }) => {
   };
 
   return (
-    <div className="max-w-xs mx-auto">
-      <p className="text-base font-medium text-black">Leaves</p>
+    <div className="max-w-xs mx-auto shadow  p-3.5 rounded-xl">
+      <p className="text-base font-medium text-black">Available Leaves</p>
       <Pie data={chartData} options={chartOptions} />
     </div>
   );

@@ -13,10 +13,11 @@ const getHeaders = () => {
   };
 };
 
-export const POST = (url, data) => {
+export const POST = (url, data,signal) => {
   return axios.post(`${base_URL}${url}`, data, {
     headers: getHeaders(),
     withCredentials: true,
+    signal:signal
   });
 };
 export const DELETE = (url, data) => {

@@ -31,10 +31,11 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const logIn = async (payload) => {
+  const logIn = async (payload , signal) => {
+   
     try {
       setLoading(true);
-      const res = await LoginAuth(payload);
+      const res = await LoginAuth(payload, signal);
       if (res.status == 200) {
         console.log(res?.data?.token);
         Cookies.set("token", res?.data?.token, {
@@ -45,13 +46,14 @@ export const AuthProvider = ({ children }) => {
         console.log(res?.data?.message);
         toast.success(res?.data?.message || "Welcome Back!");
         navigate("/");
-      }
+      } 
     } catch (error) {
       console.log(error);
       toast.error(error?.response?.data?.message || "Some thing went wrong!");
     } finally {
       setLoading(false);
     }
+  
   };
   const logout = () => {
     Cookies.remove("token");
